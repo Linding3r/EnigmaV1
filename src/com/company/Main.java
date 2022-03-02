@@ -101,7 +101,13 @@ public class Main {
       String input = sc.next();
       switch (input) {
         case "1":
-          System.out.println("ceasar");
+          System.out.println("Please type the Shift value of the encryption");
+          int shiftValue = sc.nextInt();
+          System.out.println("Please type in the text you wish to decrypt:");
+          String text = sc.next();
+          String encryptedText = cipherEncryption(text, -(shiftValue));
+          System.out.println("\nHere is your Cipher decrypted text");
+          System.out.println("\u001B[31m" + encryptedText + "\u001B[0m");
           break;
         case "2":
           System.out.println("vigenère");
