@@ -82,6 +82,24 @@ public class Main {
     return vigenereText;
   }
 
+  //Main Vigenere decryption method
+  public String vigenereDecryption(String text, String key) {
+    key = keyGenerator(text, key);
+    String decryptedText = "";
+    int position = 0;
+    for (int x = 0; x < text.length(); x++) {
+      if (convertLetterToNumber(text.charAt(x)) == 0) {
+        decryptedText += " ";
+      } else {
+        position = convertLetterToNumber(text.charAt(x)) - convertLetterToNumber(key.charAt(x));
+        if (position < 0) {
+          position += (alphabet.length - 1);
+        }decryptedText += "" + convertNumberToLetter(position);
+      }
+    }
+    return decryptedText;
+  }
+
   //Generate the key by looping the key string to the length of the desired text to encrypt
   //If text = "This is a test"   and key "test", the method will return key = "testtesttestte"
   public String keyGenerator(String text, String key) {
@@ -150,7 +168,13 @@ public class Main {
           System.out.println("\u001B[31m" + encryptedText + "\u001B[0m");
           break;
         case "2":
-          System.out.println("vigenère");
+          System.out.println("Please type the text you wish to decrypt:");
+          sc.nextLine(); //Fix of Scanner Bug
+          String text2 = sc.nextLine();
+          System.out.println("\nPlease type the Key for the decryption");
+          String key = sc.nextLine();
+          System.out.println("\nHere is your Vigenère-Cipher decrypted text");
+          System.out.println("\u001B[31m" + vigenereDecryption(text2, key) + "\u001B[0m");
           break;
         case "9":
           run = false;
